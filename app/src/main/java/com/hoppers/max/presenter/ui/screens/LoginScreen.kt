@@ -29,6 +29,7 @@ import com.hoppers.max.presenter.ui.component.Page
 import com.hoppers.max.presenter.ui.component.TextButton
 import com.hoppers.max.presenter.ui.navigations.Graph
 import com.hoppers.max.presenter.viewmodels.LoginViewModel
+import java.util.*
 
 @Composable
 fun LoginScreen() {
@@ -37,7 +38,8 @@ fun LoginScreen() {
     val loginViewModel = hiltViewModel<LoginViewModel>()
     //by context.viewModels()
 
-    Page {
+    Page(pageTitle = stringResource(id = R.string.app_name))
+    {
         when (val result = loginViewModel.state.collectAsState().value) {
             is UiState.Content -> {
                 /* Login success*/

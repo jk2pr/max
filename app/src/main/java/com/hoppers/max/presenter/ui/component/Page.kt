@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import com.hoppers.max.R
 import com.hoppers.max.localproviders.LocalNavController
+import java.util.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,7 +28,13 @@ fun Page(
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
                     navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                 ),
-                title = { if (pageTitle.isNotBlank()) Text(text = pageTitle, maxLines = 1) },
+                title = {
+                    if (pageTitle.isNotBlank())
+                        Text(text = pageTitle.replaceFirstChar {
+                        if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
+                    }, maxLines = 1
+                    )
+                },
                 navigationIcon = {
                     if (localNavController.previousBackStackEntry != null)
                         IconButton(onClick = { localNavController.popBackStack() }) {
